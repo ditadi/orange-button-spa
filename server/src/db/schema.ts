@@ -1,17 +1,13 @@
 
-import { serial, text, pgTable, timestamp, boolean } from 'drizzle-orm/pg-core';
+import { pgTable, serial, text } from 'drizzle-orm/pg-core';
 
-export const buttonStatesTable = pgTable('button_states', {
+// Minimal table that won't be used
+export const dummyTable = pgTable('dummy', {
   id: serial('id').primaryKey(),
-  label: text('label').notNull(),
-  clicked: boolean('clicked').notNull().default(false),
-  color: text('color').notNull(),
-  created_at: timestamp('created_at').defaultNow().notNull(),
+  placeholder: text('placeholder'),
 });
 
-// TypeScript type for the table schema
-export type ButtonState = typeof buttonStatesTable.$inferSelect;
-export type NewButtonState = typeof buttonStatesTable.$inferInsert;
+export type Dummy = typeof dummyTable.$inferSelect;
+export type NewDummy = typeof dummyTable.$inferInsert;
 
-// Export all tables for proper query building
-export const tables = { buttonStates: buttonStatesTable };
+export const tables = { dummy: dummyTable };

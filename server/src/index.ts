@@ -4,8 +4,6 @@ import { createHTTPServer } from '@trpc/server/adapters/standalone';
 import 'dotenv/config';
 import cors from 'cors';
 import superjson from 'superjson';
-import { getButtonStateInputSchema } from './schema';
-import { getButtonState } from './handlers/get_button_state';
 
 const t = initTRPC.create({
   transformer: superjson,
@@ -18,9 +16,6 @@ const appRouter = router({
   healthcheck: publicProcedure.query(() => {
     return { status: 'ok', timestamp: new Date().toISOString() };
   }),
-  getButtonState: publicProcedure
-    .input(getButtonStateInputSchema)
-    .query(({ input }) => getButtonState(input)),
 });
 
 export type AppRouter = typeof appRouter;
